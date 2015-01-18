@@ -5,57 +5,89 @@ output:
     keep_md: true
 ---
 
-Question1
-
-## Loading and preprocessing the data
+## 1. Loading and preprocessing the data
 
 
 ```r
 measures <- read.csv("activity.csv", stringsAsFactors=FALSE)
-head(measures)
 ```
 
-```
-##   steps       date interval
-## 1    NA 2012-10-01        0
-## 2    NA 2012-10-01        5
-## 3    NA 2012-10-01       10
-## 4    NA 2012-10-01       15
-## 5    NA 2012-10-01       20
-## 6    NA 2012-10-01       25
-```
-
-## What is mean total number of steps taken per day?
+## 2. What is mean total number of steps taken per day?
 
 
 ```r
 q1 <- aggregate(measures$steps, by=list(measures$date), FUN=sum, na.rm=TRUE)
 colnames(q1) <- c("ActivityDate", "TotalSteps")
-hist(q1$TotalSteps, xlab = "Total Steps", col="red")
+hist(q1$TotalSteps, main=" ", xlab = "Total Steps", col="red")
 ```
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
 
-```r
-print(paste("Mean value of Total Number of Steps Daily = ", mean(q1$TotalSteps)))
-```
+####Mean value of Total Number of Steps Daily =  9354.2295  
 
-```
-## [1] "Mean value of Total Number of Steps Daily =  9354.22950819672"
-```
+####Median value of Total Number of Steps Daily = 10395
+
+## 3. What is the average daily activity pattern?
 
 ```r
-print(paste("Median value of Total Number of Steps Daily = ", median(q1$TotalSteps)))
+q2 <- aggregate(measures$steps, by=list(measures$interval), FUN=mean, na.rm=TRUE)
+colnames(q2) <- c("interval", "AverageSteps")
+plot(q2$interval, q2$AverageSteps, type = "l", xlab ="Interval", ylab="Average Steps")
+```
+
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
+
+```r
+maxIndx <- which(q2$AverageSteps == max(q2$AverageSteps))
+```
+####The interval with Maximum Average Steps = 835  
+
+
+
+## 4. Imputing missing values   
+
+#### Number of Intervals with missing values = 2304
+
+Imputing the NA values with the average number of steps for that interval
+
+```r
+q3 <- merge(measures, q2, by="interval")
+q3<- q3[order(q3$date, q3$interval), ]
+colIndx <- which(is.na(q3$steps))
+q3$steps[colIndx]=q3$AverageSteps[colIndx]
+```
+Creating a new data frame q4 that is same as original values but has NA substituted with avg no of steps
+
+```r
+q4 <- q3[c("steps","date","interval")]
+head(q4)
 ```
 
 ```
-## [1] "Median value of Total Number of Steps Daily =  10395"
+##       steps       date interval
+## 1   1.71698 2012-10-01        0
+## 63  0.33962 2012-10-01        5
+## 128 0.13208 2012-10-01       10
+## 205 0.15094 2012-10-01       15
+## 264 0.07547 2012-10-01       20
+## 327 2.09434 2012-10-01       25
 ```
-## What is the average daily activity pattern?
+Plot a histogram of total steps after imputing NA values in the original dataset
+
+```r
+q5 <- aggregate(q4$steps, by=list(q4$date), FUN=sum, na.rm=TRUE)
+colnames(q5) <- c("ActivityDate", "TotalSteps")
+hist(q5$TotalSteps, main=" ", xlab = "Total Steps", col="red")
+```
+
+![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6.png) 
+
+####Mean value of Total Number of Steps Daily =  10766 
+
+####Median value of Total Number of Steps Daily = 10766  
 
 
-
-## Imputing missing values
+####The mean and median of the data set with imputed values (q5) is more than that of the data set in question 1 above (q1).  
 
 
 
