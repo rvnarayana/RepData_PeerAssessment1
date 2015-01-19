@@ -19,26 +19,34 @@ colnames(q1) <- c("ActivityDate", "TotalSteps")
 hist(q1$TotalSteps, main=" ", xlab = "Total Steps", col="red")
 ```
 
-####Mean value of Total Number of Steps Daily =  `r mean(q1$TotalSteps)`  
-
-####Median value of Total Number of Steps Daily = `r median(q1$TotalSteps)`
+####Prinitng Mean and Median values for toal number of steps
+```{r}
+print(paste("Mean value of Total Number of Steps Daily =  ", mean(q1$TotalSteps)))
+print(paste("Mean value of Total Number of Steps Daily =  ", median(q1$TotalSteps)))
+```
 
 ## 3. What is the average daily activity pattern?
 ```{r}
 q2 <- aggregate(measures$steps, by=list(measures$interval), FUN=mean, na.rm=TRUE)
 colnames(q2) <- c("interval", "AverageSteps")
 plot(q2$interval, q2$AverageSteps, type = "l", xlab ="Interval", ylab="Average Steps")
-maxIndx <- which(q2$AverageSteps == max(q2$AverageSteps))
+maxIndx <- which(q2$AverageSteps == max(q2$AverageSteps))  
 ```
-####The interval with Maximum Average Steps = `r q2$interval[maxIndx]`  
 
+####Printing below the interval with Maximum Average Steps
+```{r}
+print(paste("The interval with Maximum Average Steps = ", q2$interval[maxIndx]))
+```
 
 
 ## 4. Imputing missing values   
 
-#### Number of Intervals with missing values = `r sum(is.na(measures$steps))`
+####Calculating below the number of intervals with missing values 
+```{r}
+print(paste("Number of Intervals with missing values = ",  sum(is.na(measures$steps))))
+```
 
-Imputing the NA values with the average number of steps for that interval
+######Imputing the NA values with the average number of steps for that interval
 ```{r}
 q3 <- merge(measures, q2, by="interval")
 q3<- q3[order(q3$date, q3$interval), ]
@@ -57,10 +65,11 @@ colnames(q5) <- c("ActivityDate", "TotalSteps")
 hist(q5$TotalSteps, main=" ", xlab = "Total Steps", col="red")
 ```
 
-####Mean value of Total Number of Steps Daily =  `r format(mean(q5$TotalSteps), 2,format=f)` 
-
-####Median value of Total Number of Steps Daily = `r format(median(q5$TotalSteps), 2, format=f)`  
-
+####Prinitng Mean and Median values for toal number of steps after imputing NAs
+```{r}
+print(paste("Mean value of Total Number of Steps Daily =  ", mean(q5$TotalSteps)))
+print(paste("Mean value of Total Number of Steps Daily =  ", median(q5$TotalSteps)))  
+```
 
 ####The mean and median of the data set with imputed values (q5) is more than that of the data set in question 1 above (q1).  
 

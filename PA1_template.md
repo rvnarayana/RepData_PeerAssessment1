@@ -23,9 +23,23 @@ hist(q1$TotalSteps, main=" ", xlab = "Total Steps", col="red")
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
 
-####Mean value of Total Number of Steps Daily =  9354.2295  
+####Prinitng Mean and Median values for toal number of steps
 
-####Median value of Total Number of Steps Daily = 10395
+```r
+print(paste("Mean value of Total Number of Steps Daily =  ", mean(q1$TotalSteps)))
+```
+
+```
+## [1] "Mean value of Total Number of Steps Daily =   9354.22950819672"
+```
+
+```r
+print(paste("Mean value of Total Number of Steps Daily =  ", median(q1$TotalSteps)))
+```
+
+```
+## [1] "Mean value of Total Number of Steps Daily =   10395"
+```
 
 ## 3. What is the average daily activity pattern?
 
@@ -35,20 +49,36 @@ colnames(q2) <- c("interval", "AverageSteps")
 plot(q2$interval, q2$AverageSteps, type = "l", xlab ="Interval", ylab="Average Steps")
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
 
 ```r
-maxIndx <- which(q2$AverageSteps == max(q2$AverageSteps))
+maxIndx <- which(q2$AverageSteps == max(q2$AverageSteps))  
 ```
-####The interval with Maximum Average Steps = 835  
 
+####Printing below the interval with Maximum Average Steps
+
+```r
+print(paste("The interval with Maximum Average Steps = ", q2$interval[maxIndx]))
+```
+
+```
+## [1] "The interval with Maximum Average Steps =  835"
+```
 
 
 ## 4. Imputing missing values   
 
-#### Number of Intervals with missing values = 2304
+####Calculating below the number of intervals with missing values 
 
-Imputing the NA values with the average number of steps for that interval
+```r
+print(paste("Number of Intervals with missing values = ",  sum(is.na(measures$steps))))
+```
+
+```
+## [1] "Number of Intervals with missing values =  2304"
+```
+
+######Imputing the NA values with the average number of steps for that interval
 
 ```r
 q3 <- merge(measures, q2, by="interval")
@@ -80,12 +110,25 @@ colnames(q5) <- c("ActivityDate", "TotalSteps")
 hist(q5$TotalSteps, main=" ", xlab = "Total Steps", col="red")
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6.png) 
+![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9.png) 
 
-####Mean value of Total Number of Steps Daily =  10766 
+####Prinitng Mean and Median values for toal number of steps after imputing NAs
 
-####Median value of Total Number of Steps Daily = 10766  
+```r
+print(paste("Mean value of Total Number of Steps Daily =  ", mean(q5$TotalSteps)))
+```
 
+```
+## [1] "Mean value of Total Number of Steps Daily =   10766.1886792453"
+```
+
+```r
+print(paste("Mean value of Total Number of Steps Daily =  ", median(q5$TotalSteps)))  
+```
+
+```
+## [1] "Mean value of Total Number of Steps Daily =   10766.1886792453"
+```
 
 ####The mean and median of the data set with imputed values (q5) is more than that of the data set in question 1 above (q1).  
 
