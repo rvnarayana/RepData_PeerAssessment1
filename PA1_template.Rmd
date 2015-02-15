@@ -1,7 +1,7 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
 output: 
-  html_document:
+  html_document: 
     keep_md: true
 ---
 
@@ -9,7 +9,7 @@ output:
 ```{r}
 require(knitr)
 library(lattice)
-opts_chunk$set(echo=TRUE)
+opts_chunk$set(echo=TRUE) 
 ```
 
 ### Step 1: Loading and preprocessing the data from CSV file
@@ -94,8 +94,8 @@ print(paste("Mean value of Total Number of Steps Daily =  ", meanTotalstepsbyDay
 print(paste("Median value of Total Number of Steps Daily =  ", medianTotalstepsbyDay.noNAs))  
 ```
 
-####Mean value of Total Number of Steps Daily =   `r format(meanTotalstepsbyDay.noNAs, nsmall=2)`
-####Median value of Total Number of Steps Daily =   `r format(medianTotalstepsbyDay.noNAs, nsmall=2)`
+####Mean value of Total Number of Steps Daily = `r format(meanTotalstepsbyDay.noNAs, nsmall=2)`
+####Median value of Total Number of Steps Daily = `r format(medianTotalstepsbyDay.noNAs, nsmall=2)`
 
 --- 
 

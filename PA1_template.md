@@ -12,7 +12,7 @@ require(knitr)
 
 ```r
 library(lattice)
-opts_chunk$set(echo=TRUE)
+opts_chunk$set(echo=TRUE) 
 ```
 
 ### Step 1: Loading and preprocessing the data from CSV file
@@ -149,8 +149,8 @@ print(paste("Median value of Total Number of Steps Daily =  ", medianTotalstepsb
 ## [1] "Median value of Total Number of Steps Daily =   10766.1886792453"
 ```
 
-####Mean value of Total Number of Steps Daily =   10766.19
-####Median value of Total Number of Steps Daily =   10766.19
+####Mean value of Total Number of Steps Daily = 10766.19
+####Median value of Total Number of Steps Daily = 10766.19
 
 --- 
 
