@@ -65,8 +65,8 @@ opts_chunk$set(echo=TRUE) </code></pre>
 </div>
 <div id="step-2-what-is-mean-total-number-of-steps-taken-per-day" class="section level3">
 <h3>Step 2: What is mean total number of steps taken per day?</h3>
-<div id="plotting-histogram-of-total-steps-taken-by-day.." class="section level5">
-<h5>Plotting histogram of total steps taken by day..</h5>
+<div id="plotting-histogram-of-total-steps-taken-per-day.." class="section level5">
+<h5>Plotting histogram of total steps taken per day..</h5>
 <pre class="r"><code>totalStepsByDay &lt;- aggregate(activityData$steps, by=list(activityData$date), FUN=sum, na.rm=TRUE)
 colnames(totalStepsByDay) &lt;- c(&quot;ActivityDate&quot;, &quot;TotalSteps&quot;)
 hist(totalStepsByDay$TotalSteps, main=&quot; &quot;, xlab = &quot;Total Steps&quot;, col=&quot;red&quot;)</code></pre>

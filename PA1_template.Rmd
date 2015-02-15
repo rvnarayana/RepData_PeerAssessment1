@@ -19,7 +19,7 @@ activityData <- read.csv("activity.csv", stringsAsFactors=FALSE)
 
 ### Step 2: What is mean total number of steps taken per day?
 
-##### Plotting histogram of total steps taken by day..
+##### Plotting histogram of total steps taken per day..
 ```{r}
 totalStepsByDay <- aggregate(activityData$steps, by=list(activityData$date), FUN=sum, na.rm=TRUE)
 colnames(totalStepsByDay) <- c("ActivityDate", "TotalSteps")
